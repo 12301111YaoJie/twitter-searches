@@ -30,7 +30,7 @@ public class MainActivity extends ListActivity
    // name of SharedPreferences XML file that stores the saved searches 
    private static final String SEARCHES = "searches";
    
-   private EditText queryEditText; // EditText where user enters a query
+   //private EditText queryEditText; // EditText where user enters a query
    private EditText tagEditText; // EditText where user tags a query
    private SharedPreferences savedSearches; // user's favorite searches
    private ArrayList<String> tags; // list of tags for saved searches
@@ -44,7 +44,7 @@ public class MainActivity extends ListActivity
       setContentView(R.layout.activity_main);
 
       // get references to the EditTexts  
-      queryEditText = (EditText) findViewById(R.id.queryEditText);
+      //queryEditText = (EditText) findViewById(R.id.queryEditText);
       tagEditText = (EditText) findViewById(R.id.tagEditText);
       
       // get the SharedPreferences containing the user's saved searches 
@@ -77,14 +77,14 @@ public class MainActivity extends ListActivity
       public void onClick(View v) 
       {
          // create tag if neither queryEditText nor tagEditText is empty
-         if (queryEditText.getText().length() > 0 &&
-            tagEditText.getText().length() > 0)
+         if (tagEditText.getText().length() > 0)
          {
-            addTaggedSearch(queryEditText.getText().toString(), 
+            addTaggedSearch(tagEditText.getText().toString(), 
                tagEditText.getText().toString());
-            queryEditText.setText(""); // clear queryEditText
+            //queryEditText.setText(""); // clear queryEditText
             tagEditText.setText(""); // clear tagEditText
             
+            //这句话的作用是什么？
             ((InputMethodManager) getSystemService(
                Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(
                tagEditText.getWindowToken(), 0);  
@@ -182,8 +182,7 @@ public class MainActivity extends ListActivity
                         case 1: // edit
                            // set EditTexts to match chosen tag and query
                            tagEditText.setText(tag);
-                           queryEditText.setText(
-                              savedSearches.getString(tag, ""));
+                           //queryEditText.setText(savedSearches.getString(tag, ""));
                            break;
                         case 2: // delete
                            deleteSearch(tag);
